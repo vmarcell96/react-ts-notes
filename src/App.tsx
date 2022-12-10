@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import { Routes, Route, Navigate } from "react-router-dom";
 import { NewNote } from './components/NewNote';
 
@@ -7,6 +6,20 @@ import './app.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Container } from 'react-bootstrap';
 
+export type Note = {
+  id: string
+} & NoteData
+
+export type NoteData = {
+  title: string
+  markdown: string
+  tags: Tag[]
+}
+
+export type Tag = {
+  id: string
+  label: string
+}
 
 function App() {
 
