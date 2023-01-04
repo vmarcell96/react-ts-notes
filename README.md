@@ -5,13 +5,15 @@
 This is a React Typescript application where you can store your thoughts, or ideas, information. I made this app because the journey of a developer is hard and full of new information, and I wanted an app where I can store everything I learn. 
 So this application is basically helping me collect the useful information on my path to become a better developer, and I also wanted to practice typescript. 
 
+The front-end and back-end apps are both deployed to azure in separate containers, the application uses an sqlite database, which is deployed with the back-end app. This way I didn't have to rent an sql database server. This solution has some disadvantages, but for this kind of data persisting it will do.
+
 ## Stack
 - TypeScript
 - React
 - Axios
 - Vite
 - Asp.Net Core
-- MS SQL 
+- Sqlite database
 
 ## Features
 - Note creation
@@ -22,8 +24,7 @@ So this application is basically helping me collect the useful information on my
 
 ## Production build
 
-This is a version without api and database, but works the same. Just for presentational purposes. Later I want to deploy the complete application.
-[Deployed to Azure.](https://jolly-cliff-05f03e503.2.azurestaticapps.net/)
+[Deployed to Azure.](https://jolly-cliff-05f03e503.2.azurestaticapps.net)
 
 ## Run Locally
 ##### Prerequisites
