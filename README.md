@@ -7,7 +7,7 @@ So this application is basically helping me collect the useful information on my
 
 The front-end and back-end apps are both deployed to azure in separate containers, the application uses an sqlite database, which is deployed with the back-end app. This way I didn't have to rent an sql database server. This solution has some disadvantages, for example when there is an update on the app the deployed database is resetted, I only chose this solution for presentational purposes.
 
-A CI-CD pipeline is implemented, every time there is a push or pull request is made on the development branch the deployed app is updated.
+A CI-CD pipeline is implemented, every time there is a push, or a pull request is made on the development branch, the deployed app is updated.
 
 ## Stack
 - TypeScript
