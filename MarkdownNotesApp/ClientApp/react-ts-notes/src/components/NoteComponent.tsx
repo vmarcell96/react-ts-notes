@@ -22,18 +22,18 @@ export function NoteComponent({onDelete}: NoteProps) {
                         < Stack gap={1} direction="horizontal" className="flex-wrap">
                             {note.tags.map(tag => (
                                 // truncates text if it is long
-                                <Badge className="text-truncate" key={tag.id}>{tag.label}</Badge>
+                                <Badge className="text-truncate" key={tag.tagId}>{tag.label}</Badge>
                             ))}
                         </Stack>
                     )}
                 </Col>
                 <Col xs="auto">
                     <Stack gap={2} direction="horizontal">
-                        <Link to={`/${note.id}/edit`}>
+                        <Link to={`/${note.noteId}/edit`}>
                             <Button variant="primary">Edit</Button>
                         </Link>
                         <Button onClick={() => {
-                            onDelete(note.id);
+                            onDelete(note.noteId);
                             navigate("/");
                         }} variant="outline-danger">Delete</Button>
                         <Link to="/">

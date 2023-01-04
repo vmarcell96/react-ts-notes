@@ -1,15 +1,15 @@
-import { useMemo, useState } from "react"
+import { Dispatch, SetStateAction, useMemo, useState } from "react"
 import { Row, Col, Stack, Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
-import { Note, Tag } from "../App"
+import { Note, Tag, TagDto } from "../App"
 import { EditTagsModal } from "./EditTagsModal"
 import { NoteCard } from "./NoteCard"
 
 type NoteListProps = {
     availableTags: Tag[]
     notes: Note[]
-    onUpdateTag: (id: string, label:string) => void
+    onUpdateTag: (id: string, data: TagDto) => void
     onDeleteTag: (id: string) => void
 }
 
@@ -22,7 +22,7 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: Not
     const filteredNotes = useMemo(() => {
         return notes.filter(note => {
             return (title === "" || note.title.toLowerCase().includes(title.toLowerCase())) && 
-            (selectedTags.length === 0 || selectedTags.every(tag => note.tags.some(noteTag => noteTag.id === tag.id)))
+            (selectedTags.length === 0 || selectedTags.every(tag => note.tags.some(noteTag => noteTag.tagId === tag.tagId)))
         })
     }, [title, selectedTags, notes])
 
@@ -55,14 +55,14 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: Not
                             <Form.Label>Tags</Form.Label>
                             <ReactSelect
                                 options={availableTags.map(tag => {
-                                    return { label: tag.label, value: tag.id }
+                                    return { label: tag.label, value: tag.tagId }
                                 })}
                                 value={selectedTags.map(tag => {
-                                    return { label: tag.label, value: tag.id }
+                                    return { label: tag.label, value: tag.tagId }
                                 })}
                                 onChange={tags => {
                                     setSelectedTags(tags.map(tag => {
-                                        return { label: tag.label, id: tag.value }
+                                        return { label: tag.label, tagId: tag.value }
                                     }))
                                 }}
                                 isMulti />
@@ -72,8 +72,8 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: Not
             </Form>
             <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
                 {filteredNotes.map(note => (
-                    <Col key={note.id}>
-                        <NoteCard id={note.id} title={note.title} tags={note.tags} />
+                    <Col key={note.noteId}>
+                        <NoteCard id={note.noteId} title={note.title} tags={note.tags} />
                     </Col>
                 ))}
             </Row>

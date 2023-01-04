@@ -20,7 +20,7 @@ export function NoteCard({ id, title, tags }: SimplifiedNoteNote) {
                         <Stack gap={1} direction="horizontal" className="justify-content-center flex-wrap">
                             {tags.map(tag => (
                                 // truncates text if it is long
-                                <Badge className="text-truncate" key={tag.id}>{tag.label}</Badge>
+                                <Badge className="text-truncate" key={tag.tagId}>{tag.label}</Badge>
                             ))}
                         </Stack>
                     )}
