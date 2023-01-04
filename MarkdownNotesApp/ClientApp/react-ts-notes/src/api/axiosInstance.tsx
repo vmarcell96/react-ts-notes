@@ -1,9 +1,21 @@
 import axios from 'axios';
 
-const BASE_URL: string = "https://localhost:7218";
+const getBaseUrl = () => {
+    let url;
+    switch(process.env.NODE_ENV) {
+      case 'production':
+        url = 'https://noteappapi.azurewebsites.net';
+        break;
+      case 'development':
+      default:
+        url = 'https://localhost:7218';
+    }
+  
+    return url;
+  }
 
 export default axios.create({
-    baseURL: BASE_URL,
+    baseURL: getBaseUrl(),
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
