@@ -10,7 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
+    defaults:
+      run:
+        working-directory: ./MarkdownNotesApp
+        
     runs-on: windows-latest
 
     steps:
