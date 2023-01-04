@@ -38,6 +38,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var db = services.GetRequiredService<NotesApiDbContext>();
+        db.Database.EnsureCreated();
+    }
+    catch (Exception e)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(e, "An error occurred while seeding the database.");
+    }
+}
+
+
 app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
