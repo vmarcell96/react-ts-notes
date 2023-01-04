@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173", "https://jolly-cliff-05f03e503.2.azurestaticapps.net/")
+            policy.WithOrigins("http://localhost:5173", "https://jolly-cliff-05f03e503.2.azurestaticapps.net")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
