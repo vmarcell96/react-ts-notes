@@ -3,21 +3,27 @@ using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System;
 using System.Reflection.Emit;
+using Microsoft.Extensions.Configuration;
 
 namespace MarkdownNotesApp.Data
 {
     public class NotesApiDbContext : DbContext
     {
-        public NotesApiDbContext(DbContextOptions options) : base(options)
-        {
-        }
 
+        protected readonly IConfiguration Configuration;
+
+        public NotesApiDbContext(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            base.OnModelCreating(builder);
+            // connect to sqlite database
+            options.UseSqlite(Configuration.GetConnectionString("NotesApiConnectionString"));
         }
     }
 }

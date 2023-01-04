@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MarkdownNotesApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,9 +15,9 @@ namespace MarkdownNotesApp.Migrations
                 name: "Notes",
                 columns: table => new
                 {
-                    NoteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Markdown = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NoteId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Markdown = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,8 +28,8 @@ namespace MarkdownNotesApp.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Label = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TagId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Label = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,8 +40,8 @@ namespace MarkdownNotesApp.Migrations
                 name: "NoteTag",
                 columns: table => new
                 {
-                    NotesNoteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TagsTagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    NotesNoteId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TagsTagId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
