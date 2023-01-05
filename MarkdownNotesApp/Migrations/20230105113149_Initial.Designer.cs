@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarkdownNotesApp.Migrations
 {
     [DbContext(typeof(NotesApiDbContext))]
-    [Migration("20230104123038_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230105113149_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -23,11 +23,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<SelfMigrationHelper>();
 //In memory implementation
 //builder.Services.AddDbContext<NotesApiDbContext>(options => options.UseInMemoryDatabase("NotesDb"));
+
 //Sql server implementation
+//builder.Services.AddDbContext<NotesApiDbContext>(options => 
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("NotesApiConnectionString")));
+
+//Sqlite database implementation
 builder.Services.AddDbContext<NotesApiDbContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NotesApiConnectionString")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("NotesApiConnectionString")));
+
+
 
 var app = builder.Build();
 
@@ -43,7 +51,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
+        var selfMigrationHelper = services.GetRequiredService<SelfMigrationHelper>();
         var db = services.GetRequiredService<NotesApiDbContext>();
+        selfMigrationHelper.Migrate<NotesApiDbContext>(app);
         db.Database.EnsureCreated();
     }
     catch (Exception e)
