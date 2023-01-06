@@ -1,0 +1,35 @@
+/* body>#root>div {
+    height: 100vh;
+} */
+
+[data-theme='dark'].Theme-wrapper {
+    background-color: #263238;
+    color: white;
+}
+
+.Theme-wrapper {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #ECEFF1;
+    color: black;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+[data-theme='dark'] .card {
+    background-color: #37474F;
+}
+
+[data-theme='dark'] .input-field {
+    background-color: #37474F;
+}
+
+[data-theme='dark'] .input-field.active {
+    background-color: #37474F;
+}
+
+.switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
