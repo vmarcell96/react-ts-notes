@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
+import { Note, NoteDto } from '../@types/notes';
 import axios from '../api/axiosInstance';
-import { Note, NoteDto } from '../App';
 
 export function useNotesService() {
 

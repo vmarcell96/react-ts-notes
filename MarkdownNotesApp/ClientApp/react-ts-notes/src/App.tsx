@@ -1,4 +1,4 @@
-import { Context, useEffect, useState, createContext } from 'react'
+import { Context, useEffect, useState, createContext, useContext } from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
 import { NewNote } from './components/NewNote';
 
@@ -11,33 +11,16 @@ import { NoteComponent } from './components/NoteComponent';
 import { EditNote } from './components/EditNote';
 import { useNotesService } from './services/notes.service';
 import { useTagsService } from './services/tags.service';
+import { Note, NoteDto, Tag, TagDto } from './@types/notes';
+import ThemeProvider, { ThemeContext } from './context/themeContext';
+import Footer from './components/Footer';
+import ThemeWrapper from './components/ThemeWrapper';
 
-export type Note = {
-  noteId: string
-  title: string
-  markdown: string
-  tags: Tag[]
-}
 
-export type NoteDto = {
-  title: string
-  markdown: string
-  tagCreateDtos: TagDto[]
-}
 
-export type Tag = {
-  tagId: string
-  label: string
-}
 
-export type TagDto = {
-  label: string
-}
-
-export const ThemeContext: any = createContext(null);
 
 function App() {
-  const [theme, setTheme] = useState<string>("light");
 
   const [notes, setNotes] = useState<Note[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
@@ -46,9 +29,7 @@ function App() {
   const { getAllNotes, getNoteById, addNewNote, updateNoteById, deleteNoteById } = useNotesService();
   const { getAllTags, updateTagById, deleteTagById } = useTagsService();
 
-  const toggleTheme = (): void => {
-    setTheme((curr: string) => (curr === "light" ? "dark" : "light"));
-  }
+
 
 
   const getNotes = async () => {
@@ -155,28 +136,32 @@ function App() {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <Container className='my-4' id={theme}>
-        {notes && tags && <Routes>
-          <Route path="/" element={<NoteList notes={notes} availableTags={tags} onUpdateTag={updateTag} onDeleteTag={deleteTag} />} />
-          <Route path="/new"
-            element={<NewNote
-              onSubmit={onCreateNote}
-              availableTags={tags}
-            />} />
-          <Route path="/:id" element={<NoteLayout notes={notes} />}>
-            <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
-            <Route path="edit" index
-              element={<EditNote
-                onSubmit={onUpdateNote}
+
+    <ThemeProvider>
+      <ThemeWrapper>
+        <Container className='py-4 pb-0'>
+          {notes && tags && <Routes>
+            <Route path="/" element={<NoteList notes={notes} availableTags={tags} onUpdateTag={updateTag} onDeleteTag={deleteTag} />} />
+            <Route path="/new"
+              element={<NewNote
+                onSubmit={onCreateNote}
                 availableTags={tags}
               />} />
-          </Route>
-          {/* Redirect to homepage when invalid url is provided */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>}
-      </Container>
-    </ThemeContext.Provider>
+            <Route path="/:id" element={<NoteLayout notes={notes} />}>
+              <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
+              <Route path="edit" index
+                element={<EditNote
+                  onSubmit={onUpdateNote}
+                  availableTags={tags}
+                />} />
+            </Route>
+            {/* Redirect to homepage when invalid url is provided */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>}
+          <Footer />
+        </Container>
+      </ThemeWrapper>
+    </ThemeProvider>
   )
 }
 
