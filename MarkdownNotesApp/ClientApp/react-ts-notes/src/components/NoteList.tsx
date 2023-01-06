@@ -46,14 +46,14 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: Not
                     <Col>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" value={title}
+                            <Form.Control className="input-field" type="text" value={title}
                                 onChange={e => setTitle(e.target.value)} />
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group controlId="tags">
                             <Form.Label>Tags</Form.Label>
-                            <ReactSelect
+                            <ReactSelect className="input-field"
                                 options={availableTags.map(tag => {
                                     return { label: tag.label, value: tag.tagId }
                                 })}
