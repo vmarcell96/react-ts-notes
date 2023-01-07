@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useMemo, useState } from "react"
 import { Row, Col, Stack, Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
-import { Note, Tag, TagDto } from "../App"
+import { Note, Tag, TagDto } from "../@types/notes"
 import { EditTagsModal } from "./EditTagsModal"
 import { NoteCard } from "./NoteCard"
 

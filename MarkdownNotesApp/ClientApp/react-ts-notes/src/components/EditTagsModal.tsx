@@ -1,5 +1,5 @@
 import { Button, Col, Form, Modal, Row, Stack } from "react-bootstrap";
-import { Tag, TagDto } from "../App";
+import { Tag, TagDto } from "../@types/notes";
 
 type EditTagsModalProps = {
     availableTags: Tag[]

@@ -1,6 +1,6 @@
 import { Badge, Card, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { Tag } from "../App"
+import { Tag } from "../@types/notes"
 import styles from "./NoteList.module.css"
 
 type SimplifiedNoteNote = {

@@ -2,7 +2,7 @@ import { FormEvent, useRef, useState } from "react";
 import { Form, Stack, Col, Row, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
-import { NoteDto, Tag, TagDto } from "../App";
+import { NoteDto, Tag, TagDto } from "../@types/notes";
 
 type NoteFormProps = {
     onSubmit: (data: NoteDto) => void
