@@ -10,7 +10,6 @@ const getBaseUrl = () => {
       default:
         url = 'https://localhost:7218';
     }
-    console.log(url);
     return url;
   }
 

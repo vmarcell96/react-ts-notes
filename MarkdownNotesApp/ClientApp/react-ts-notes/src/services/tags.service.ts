@@ -1,5 +1,5 @@
+import { Tag, TagDto } from '../@types/notes';
 import axios from '../api/axiosInstance';
-import { Tag, TagDto } from '../App';
 
 export function useTagsService() {
 

@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useMemo, useState } from "react"
 import { Row, Col, Stack, Button, Form } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
-import { Note, Tag, TagDto } from "../App"
+import { Note, Tag, TagDto } from "../@types/notes"
 import { EditTagsModal } from "./EditTagsModal"
 import { NoteCard } from "./NoteCard"
 
@@ -30,7 +30,6 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: Not
         <>
             <Row className="align-items-center mb-4">
                 <Col>
-                    <h1>Notes</h1>
                 </Col>
                 <Col xs="auto">
                     <Stack gap={2} direction="horizontal">
@@ -46,14 +45,14 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }: Not
                     <Col>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" value={title}
+                            <Form.Control className="input-field" type="text" value={title}
                                 onChange={e => setTitle(e.target.value)} />
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group controlId="tags">
                             <Form.Label>Tags</Form.Label>
-                            <ReactSelect
+                            <ReactSelect className="input-field"
                                 options={availableTags.map(tag => {
                                     return { label: tag.label, value: tag.tagId }
                                 })}

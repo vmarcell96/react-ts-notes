@@ -1,6 +1,8 @@
 .card {
     transition: translate ease-in-out 100ms, nbox-shadow
     ease-in-out 100ms;
+    background: var(--bg-secondary);
+    
 }
 
 .card:hover,

@@ -1,46 +1,36 @@
-import { useEffect, useState } from 'react'
+import { Context, useEffect, useState, createContext, useContext } from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
 import { NewNote } from './components/NewNote';
 
 import './app.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { NoteList } from './components/NoteList';
 import { NoteLayout } from './components/NoteLayout';
 import { NoteComponent } from './components/NoteComponent';
 import { EditNote } from './components/EditNote';
 import { useNotesService } from './services/notes.service';
 import { useTagsService } from './services/tags.service';
+import { Note, NoteDto, Tag, TagDto } from './@types/notes';
+import ThemeProvider, { ThemeContext } from './context/themeContext';
+import Footer from './components/Footer';
+import ThemeWrapper from './components/ThemeWrapper';
+import { Navbar } from './components/Navbar';
 
-export type Note = {
-  noteId: string
-  title: string
-  markdown: string
-  tags: Tag[]
-}
 
-export type NoteDto = {
-  title: string
-  markdown: string
-  tagCreateDtos: TagDto[]
-}
 
-export type Tag = {
-  tagId: string
-  label: string
-}
 
-export type TagDto = {
-  label: string
-}
 
 function App() {
+
   const [notes, setNotes] = useState<Note[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
 
 
   const { getAllNotes, getNoteById, addNewNote, updateNoteById, deleteNoteById } = useNotesService();
   const { getAllTags, updateTagById, deleteTagById } = useTagsService();
+
+
 
 
   const getNotes = async () => {
@@ -86,7 +76,7 @@ function App() {
     setTags(updatedTags);
   }
 
-  
+
   function updateTags() {
     const usedTags: Array<Tag> = [];
     notes.forEach(note => {
@@ -147,26 +137,37 @@ function App() {
   }
 
   return (
-    <Container className='my-4'>
-      {notes && tags && <Routes>
-        <Route path="/" element={<NoteList notes={notes} availableTags={tags} onUpdateTag={updateTag} onDeleteTag={deleteTag} />} />
-        <Route path="/new"
-          element={<NewNote
-            onSubmit={onCreateNote}
-            availableTags={tags}
-          />} />
-        <Route path="/:id" element={<NoteLayout notes={notes} />}>
-          <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
-          <Route path="edit" index
-            element={<EditNote
-              onSubmit={onUpdateNote}
-              availableTags={tags}
-            />} />
-        </Route>
-        {/* Redirect to homepage when invalid url is provided */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>}
-    </Container>
+
+    <ThemeProvider>
+      <ThemeWrapper>
+          <Navbar />
+          <Container className='pt-4 main-container'>
+            <Row >
+              <Col>
+                {notes && tags && <Routes>
+                  <Route path="/" element={<NoteList notes={notes} availableTags={tags} onUpdateTag={updateTag} onDeleteTag={deleteTag} />} />
+                  <Route path="/new"
+                    element={<NewNote
+                      onSubmit={onCreateNote}
+                      availableTags={tags}
+                    />} />
+                  <Route path="/:id" element={<NoteLayout notes={notes} />}>
+                    <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
+                    <Route path="edit" index
+                      element={<EditNote
+                        onSubmit={onUpdateNote}
+                        availableTags={tags}
+                      />} />
+                  </Route>
+                  {/* Redirect to homepage when invalid url is provided */}
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>}
+              </Col>
+            </Row>
+          </Container>
+            <Footer />
+      </ThemeWrapper>
+    </ThemeProvider>
   )
 }
 

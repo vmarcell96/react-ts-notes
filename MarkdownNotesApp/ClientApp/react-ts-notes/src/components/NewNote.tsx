@@ -1,4 +1,4 @@
-import { NoteDto, Tag } from "../App";
+import { NoteDto, Tag } from "../@types/notes";
 import { NoteForm } from "./NoteForm";
 
 

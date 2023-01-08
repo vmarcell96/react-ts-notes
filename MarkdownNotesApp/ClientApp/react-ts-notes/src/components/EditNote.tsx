@@ -1,4 +1,4 @@
-import {  NoteDto, Tag } from "../App";
+import { NoteDto, Tag } from "../@types/notes";
 import { NoteForm } from "./NoteForm";
 import { useNote } from "./NoteLayout";
 
@@ -10,7 +10,7 @@ type EditNoteProps = {
 
 export function EditNote({ onSubmit, availableTags }: EditNoteProps ) {
     const note = useNote();
-    const tagDtos = note.tags.map(tag => { return {label: tag.label} });
+    const tagDtos = note.tags.map((tag: { label: string; }) => { return {label: tag.label} });
     return (
         <>
             <h1 className="mb-4">Edit note</h1>
