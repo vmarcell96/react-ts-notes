@@ -12,12 +12,6 @@ const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
     return (
         <>
             <div className="Theme-wrapper" data-theme={theme}>
-                <Form.Check
-                    onChange={toggleTheme}
-                    type="switch"
-                    id="custom-switch"
-                />
-
                 {children}
             </div>
         </>
