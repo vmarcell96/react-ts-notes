@@ -4,7 +4,7 @@ import { NewNote } from './components/NewNote';
 
 import './app.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { NoteList } from './components/NoteList';
 import { NoteLayout } from './components/NoteLayout';
 import { NoteComponent } from './components/NoteComponent';
@@ -15,6 +15,7 @@ import { Note, NoteDto, Tag, TagDto } from './@types/notes';
 import ThemeProvider, { ThemeContext } from './context/themeContext';
 import Footer from './components/Footer';
 import ThemeWrapper from './components/ThemeWrapper';
+import { Navbar } from './components/Navbar';
 
 
 
@@ -139,27 +140,32 @@ function App() {
 
     <ThemeProvider>
       <ThemeWrapper>
-        <Container className='py-4 pb-0'>
-          {notes && tags && <Routes>
-            <Route path="/" element={<NoteList notes={notes} availableTags={tags} onUpdateTag={updateTag} onDeleteTag={deleteTag} />} />
-            <Route path="/new"
-              element={<NewNote
-                onSubmit={onCreateNote}
-                availableTags={tags}
-              />} />
-            <Route path="/:id" element={<NoteLayout notes={notes} />}>
-              <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
-              <Route path="edit" index
-                element={<EditNote
-                  onSubmit={onUpdateNote}
-                  availableTags={tags}
-                />} />
-            </Route>
-            {/* Redirect to homepage when invalid url is provided */}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>}
-          <Footer />
-        </Container>
+          <Navbar />
+          <Container className='pt-4 main-container'>
+            <Row >
+              <Col>
+                {notes && tags && <Routes>
+                  <Route path="/" element={<NoteList notes={notes} availableTags={tags} onUpdateTag={updateTag} onDeleteTag={deleteTag} />} />
+                  <Route path="/new"
+                    element={<NewNote
+                      onSubmit={onCreateNote}
+                      availableTags={tags}
+                    />} />
+                  <Route path="/:id" element={<NoteLayout notes={notes} />}>
+                    <Route index element={<NoteComponent onDelete={onDeleteNote} />} />
+                    <Route path="edit" index
+                      element={<EditNote
+                        onSubmit={onUpdateNote}
+                        availableTags={tags}
+                      />} />
+                  </Route>
+                  {/* Redirect to homepage when invalid url is provided */}
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>}
+              </Col>
+            </Row>
+          </Container>
+            <Footer />
       </ThemeWrapper>
     </ThemeProvider>
   )
