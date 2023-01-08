@@ -9,7 +9,7 @@ export const ThemeContext = createContext<ThemeContextType | null>(null);
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
-    const [theme, setTheme] = useState<Theme>("light");
+    const [theme, setTheme] = useState<Theme>("dark");
 
     const toggleTheme = (): void => {
         setTheme((curr: string) => (curr === "light" ? "dark" : "light"));
