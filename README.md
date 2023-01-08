@@ -9,6 +9,8 @@ The front-end and back-end apps are both deployed to azure in separate container
 
 A CI-CD pipeline is implemented, every time there is a push, or a pull request is made on the development branch, the deployed app is updated.
 
+I develop the application to be fully responsive.
+
 ## Stack
 - TypeScript
 - React
@@ -23,6 +25,8 @@ A CI-CD pipeline is implemented, every time there is a push, or a pull request i
 - Managing tags
 - Updating notes,tags
 - Everything is persisted
+- Day/Night theme
+- Responsive page and side navigation bar
 
 ## Production build
 
@@ -68,7 +72,7 @@ Run IIS Express server
 
 ## Roadmap
 
-- Deploy the complete app to Azure
 - User registration/log in
+- Authentication/Authorization
 - Testing back end
 
