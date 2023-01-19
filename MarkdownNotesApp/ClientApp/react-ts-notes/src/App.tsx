@@ -16,7 +16,7 @@ import ThemeProvider, { ThemeContext } from './context/themeContext';
 import Footer from './components/Footer';
 import ThemeWrapper from './components/ThemeWrapper';
 import { Navbar } from './components/Navbar';
-
+import { BrowserRouter } from 'react-router-dom'
 
 
 
@@ -137,9 +137,9 @@ function App() {
   }
 
   return (
-
-    <ThemeProvider>
-      <ThemeWrapper>
+    <BrowserRouter>
+      <ThemeProvider>
+        <ThemeWrapper>
           <Navbar />
           <Container className='pt-4 main-container'>
             <Row >
@@ -165,9 +165,10 @@ function App() {
               </Col>
             </Row>
           </Container>
-            <Footer />
-      </ThemeWrapper>
-    </ThemeProvider>
+          <Footer />
+        </ThemeWrapper>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 

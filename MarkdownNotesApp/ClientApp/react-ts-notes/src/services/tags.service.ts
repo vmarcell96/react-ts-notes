@@ -1,14 +1,30 @@
+import axios, { AxiosError } from 'axios';
 import { Tag, TagDto } from '../@types/notes';
-import axios from '../api/axiosInstance';
+import axiosInstance from '../api/axiosInstance';
+
 
 export function useTagsService() {
 
     const getAllTags = async () => {
-        const res = await axios.get<Array<Tag>>("/api/tags");
-        if (res !== undefined) {
-            return res.data;
+        try {
+
+            const { data, status } = await axiosInstance.get<Array<Tag>>("/api/tags",);
+            return data;
+
+        } catch (error) {
+            const err = error as Error | AxiosError;
+            if (axios.isAxiosError(err)) {
+                // axios error
+                console.log('error message: ', err.message);
+            } else if (err instanceof Error) {
+                // native error
+                console.log('unexpected error: ', err);
+            } else {
+                // unknown
+                console.log('unknown error: ', err);
+            }
+            return null;
         }
-        return null;
     }
 
     const updateTagById = async (data: TagDto, id: string) => {
