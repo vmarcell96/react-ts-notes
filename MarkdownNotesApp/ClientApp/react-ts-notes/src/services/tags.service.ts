@@ -1,46 +1,53 @@
 import axios, { AxiosError } from 'axios';
+import useErrorHandler from '../hooks/useErrorHandler';
 import { Tag, TagDto } from '../@types/notes';
 import axiosInstance from '../api/axiosInstance';
 
 
 export function useTagsService() {
 
+    const { handleError } = useErrorHandler();
+
     const getAllTags = async () => {
+        const url = "/api/tags";
+        const method = "get";
         try {
 
-            const { data, status } = await axiosInstance.get<Array<Tag>>("/api/tags",);
+            const { data, status } = await axiosInstance.get<Array<Tag>>("/api/tags");
             return data;
 
-        } catch (error) {
-            const err = error as Error | AxiosError;
-            if (axios.isAxiosError(err)) {
-                // axios error
-                console.log('error message: ', err.message);
-            } else if (err instanceof Error) {
-                // native error
-                console.log('unexpected error: ', err);
-            } else {
-                // unknown
-                console.log('unknown error: ', err);
-            }
+        } catch (err) {
+            handleError(url, method, err);
             return null;
         }
     }
 
-    const updateTagById = async (data: TagDto, id: string) => {
-        const res = await axios.put<Tag>(`/api/tags/${id}`, data);
-        if (res !== undefined) {
-            return res.data;
+    const updateTagById = async (requestData: TagDto, id: string) => {
+        const url = `/api/tags/${id}`;
+        const method = "put";
+        try {
+
+            const { data, status } = await axiosInstance.put<Tag>(url, requestData);
+            return data;
+
+        } catch (err) {
+            handleError(url, method, err);
+            return null;
         }
-        return null;
     }
 
     const deleteTagById = async (id: string) => {
-        const res = await axios.delete<any>(`/api/tags/${id}`);
-        if (res !== undefined) {
-            return res.data;
+        const url = `/api/tags/${id}`;
+        const method = "delete";
+        try {
+
+            const { data, status } = await axiosInstance.delete<Tag>(url);
+            return data;
+
+        } catch (err) {
+            handleError(url, method, err);
+            return null;
         }
-        return null;
     }
 
     return { getAllTags, updateTagById, deleteTagById }
