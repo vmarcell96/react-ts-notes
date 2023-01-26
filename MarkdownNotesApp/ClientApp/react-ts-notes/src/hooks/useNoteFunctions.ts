@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Note, NoteDto, Tag, TagDto } from '../@types/notes';
 import { useNotesService } from '../services/notes.service';
 import { useTagsService } from '../services/tags.service';
@@ -27,7 +27,7 @@ const useNoteFunctions = () => {
 
     async function onCreateNote(data: NoteDto) {
         const newNote = await addNewNote(data);
-        if (newNote !== undefined) {
+        if (newNote !== null) {
             setNotes([...notes, newNote]);
         }
     }
@@ -76,7 +76,7 @@ const useNoteFunctions = () => {
         setNotes(newNotes);
     }
 
-    
+
     async function onUpdateNote(id: string, data: NoteDto) {
         const updatedNote: Note | null = await updateNoteById(data, id);
         const noteToUpdate = notes.find(note => note.noteId === id);
