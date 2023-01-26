@@ -1,4 +1,4 @@
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
 import { NewNote } from './components/NewNote';
 
@@ -15,6 +15,8 @@ import ThemeWrapper from './components/ThemeWrapper';
 import { Navbar } from './components/Navbar';
 import { BrowserRouter } from 'react-router-dom'
 import useNoteFunctions from './hooks/useNoteFunctions';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -41,6 +43,7 @@ function App() {
         <ThemeWrapper>
           <Navbar />
           <Container className='pt-4 main-container'>
+            <ToastContainer />
             <Row >
               <Col>
                 {notes && tags && <Routes>
